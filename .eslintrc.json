@@ -4,8 +4,6 @@
     "es2021": true
   },
   "extends": [
-    "airbnb",
-    "airbnb/hooks",
     "plugin:import/recommended",
     "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended",
