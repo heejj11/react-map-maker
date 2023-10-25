@@ -13,7 +13,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": ["tsconfig.json"]
   },
   "plugins": [
     "react",
@@ -27,7 +27,17 @@
         "endOfLine": "auto"
       }
     ],
-    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [
+      2,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
     "@typescript-eslint/no-explicit-any": [
       "off"
     ],
@@ -40,7 +50,9 @@
     "arrow-parens": [
       "warn",
       "as-needed"
-    ]
+    ],
+    "import/extensions": 0,
+    "import/no-unresolved": "off"
   },
   "settings": {
     "import/resolver": {
@@ -53,9 +65,17 @@
         ]
       },
       "alias": {
-        "extensions": [".ts", ".tsx", ".js", ".jsx"],
+        "extensions": [
+          ".ts",
+          ".tsx",
+          ".js",
+          ".jsx"
+        ],
         "map": [
-          ["@", "./src"]
+          [
+            "@",
+            "./src"
+          ]
         ]
       }
     }
