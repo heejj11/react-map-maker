@@ -16,8 +16,7 @@ const MapNaver = () => {
   const [districtList, setDistrictList] = useState<DistrictResponse[]>([])
 
   useEffect(() => {
-    if (!naver || !naver.maps) return
-    if (!mapRef.current) return
+    if (!naver || !mapRef) return
     const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude)
     const mapOption = {
       center: location,
@@ -38,8 +37,11 @@ const MapNaver = () => {
       mapRef.current.getBounds()
       zoomHandler()
     })
-    naver.maps.Event.addListener(mapRef.current, "zoom_changed", function (zoom: any) {
+    naver.maps.Event.addListener(mapRef.current, "zoom_changed", (zoom: any) => {
       zoomHandler(zoom)
+    })
+    naver.maps.Event.addListener(mapRef.current, "dragend", () => {
+      zoomHandler(mapRef.current.getZoom())
     })
   }, [])
 
@@ -47,11 +49,11 @@ const MapNaver = () => {
     addMarkerHandler()
   }, [districtList])
 
-  const zoomHandler = (e?: any) => {
+  const zoomHandler = (zoom?: any) => {
     if (!mapRef.current) return
     const bound: MapBounds = mapRef.current.getBounds()
-    if (e) setCurrentZoom(e)
-    const level = e < 11 || !e ? 1 : 2
+    if (zoom) setCurrentZoom(zoom)
+    const level = zoom < 11 || !zoom ? 1 : 2
     fetchData(level, bound)
   }
 
@@ -74,16 +76,16 @@ const MapNaver = () => {
         })
         newMarker.addListener("mouseover", () => {
           newMarker.eventTarget.querySelector(".tooltip").style.display = "flex"
-          newMarker.eventTarget.style.zIndex = "10"
+          newMarker.eventTarget.querySelector(".marker").style.zIndex = "100"
         })
 
         newMarker.addListener("mouseout", () => {
           newMarker.eventTarget.querySelector(".tooltip").style.display = "none"
-          newMarker.eventTarget.style.zIndex = "0"
+          newMarker.eventTarget.querySelector(".marker").style.zIndex = "0"
         })
 
-        newMarker.addListener("click", (e: any) => {
-          if (currentZoom > 15 || currentZoom < 8) return
+        newMarker.addListener("click", () => {
+          if (currentZoom > 15 || currentZoom < 7) return
 
           const zoom = currentZoom + 3
           mapRef.current.setZoom(zoom)
