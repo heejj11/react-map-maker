@@ -1,0 +1,21 @@
+.header {
+    width: 100%;
+    height: 80px;
+}
+
+.header .title_box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 2px solid #000000;
+}
+
+.header .title {
+    margin-left: 20px;
+}
+
+.main {
+    width: 100%;
+    height: calc(100vh - 100px);
+}
