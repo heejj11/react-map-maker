@@ -8,7 +8,7 @@ export interface DistrictRequest {
 
 export interface DistrictResponse {
   allCnt: number
-  bjdCode: string
+  bjdCode?: string
   districtLevel: number
   districtNm: string
   districtNmSimple: string
@@ -17,7 +17,7 @@ export interface DistrictResponse {
   maintenanceSmallCnt: number
   reConstructionCnt: number
   reDevelopmentCnt: number
-  zoneRoad: string
+  zoneRoad?: string
   streetHouseCnt: number
   collectHouseCnt?: number
   urbanDevelopmentTransferCnt?: number
